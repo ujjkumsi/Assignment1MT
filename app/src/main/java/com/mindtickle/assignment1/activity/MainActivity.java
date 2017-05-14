@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ProgressDialog mProgress;
 
-    private int loadingItem, loadedItem;
+    private int loadingItem, loadedItem, currentCount;
 
 
     @Override
@@ -190,6 +190,7 @@ public class MainActivity extends AppCompatActivity {
         response = response.substring(14,response.length()-1);
         JSONObject resp = new JSONObject(response);
         JSONArray array = resp.getJSONObject("photos").getJSONArray("photo");
+        currentCount = 0;
 
         for(int i = 0; i < array.length(); i++){
             try {
@@ -222,6 +223,7 @@ public class MainActivity extends AppCompatActivity {
         if (timer != null) {
             timer.cancel();
             timer = null;
+            Toast.makeText(MainActivity.this, "Slideshow ended", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -240,13 +242,15 @@ public class MainActivity extends AppCompatActivity {
                          *                  i.e. loadedItem = loadingItem when all photo are downloaded
                          */
 
+                        if(currentCount>=mPhotos.size())
+                            stopSlideShow();
+
                         if (loadingItem == loadedItem) {
 
                             Toast.makeText(MainActivity.this, new Date().toString(), Toast.LENGTH_SHORT).show();
 
-                            if(mSlideShowPhotos.size() > 0){
+                            if(mSlideShowPhotos.size() > 0 && currentCount > 0){
                                 mProgress.dismiss();
-
                                 mAdapter.updateItems(mSlideShowPhotos.size());
                                 scrollToLastPosition();
                             }
@@ -262,7 +266,7 @@ public class MainActivity extends AppCompatActivity {
                             List<String> urls = new ArrayList<String>();
 
 
-                            for (int i = mSlideShowPhotos.size(); i < mPhotos.size(); i++) {
+                            for (int i = currentCount; i < mPhotos.size(); i++) {
                                 int w = Integer.parseInt(mPhotos.get(i).getWidth_n());
                                 int h = mPhotos.get(i).getHeight_n();
                                 if (screenWidth > w + margin) {
@@ -305,12 +309,14 @@ public class MainActivity extends AppCompatActivity {
                 public void onResponse(Bitmap bitmap) {
                     mSlideShowPhotos.add(bitmap);
                     loadedItem++;
+                    currentCount++;
                 }
 
             }, 1080, 1920, null, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     loadedItem++;
+                    currentCount++;
                 }
             }));
         }
