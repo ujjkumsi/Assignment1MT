@@ -1,0 +1,8 @@
+<resources>
+
+    <string name="app_name">Assignment1</string>
+
+    <string name="flickr_key">561e43a41bff5aaf8f0e3f2b17e1e5a8</string>
+    <string name="flickr_secret">971717e98902a5af</string>
+
+</resources>
