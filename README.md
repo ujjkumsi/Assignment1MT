@@ -23,23 +23,20 @@ Memory optimized code is a huge plus and so is the structure and readability of 
 
 
 Files Information
-activity/MainActivity.java :  Default Activity and Implementation of slideshow logic with all volley request
-                              (asynchronous task + timer task)
-adapter/FeedAdapter.java :    RecyclerView adapter to show images/photos from flickr api
-utils/Assignment1Utils.java : Common utility fuctions to calculate screen size and other
-utils/Constants.java  :       constants
-Assignment1Application.java : Application
-models/Photo.java :           Photo object from flickr
+1. activity/MainActivity.java :  Default Activity and Implementation of slideshow logic with all volley request (asynchronous task + timer task)
+2. adapter/FeedAdapter.java :    RecyclerView adapter to show images/photos from flickr api
+3. utils/Assignment1Utils.java : Common utility fuctions to calculate screen size and other
+4. utils/Constants.java  :       constants
+5. Assignment1Application.java : Application
+6. models/Photo.java :           Photo object from flickr
 
 
 Libraries used:
-butterknife, jackson, volley and support libraries from android
+1. butterknife, 2. jackson, 3. volley and 4. support libraries from android
 
 How to use it:
 1. Open the App
 2. Press start slide show button or play button in action bar
 3. To restart press play button and to pause press pause button
-
-Path for debug apk:
 
 
