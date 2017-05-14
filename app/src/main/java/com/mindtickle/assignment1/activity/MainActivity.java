@@ -37,6 +37,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -141,6 +142,8 @@ public class MainActivity extends AppCompatActivity {
      */
     private void requestFlickrImages(){
 
+        stopSlideShow();
+
         btnGetPhoto.setVisibility(View.GONE);
         mPhotos = new ArrayList<Photo>();
         mSlideShowPhotos = new ArrayList<Bitmap>();
@@ -238,6 +241,8 @@ public class MainActivity extends AppCompatActivity {
                          */
 
                         if (loadingItem == loadedItem) {
+
+                            Toast.makeText(MainActivity.this, new Date().toString(), Toast.LENGTH_SHORT).show();
 
                             if(mSlideShowPhotos.size() > 0){
                                 mProgress.dismiss();
